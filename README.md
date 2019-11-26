@@ -16,3 +16,28 @@ Better understanding electric vehicle charging processes, potential charging eff
 We are interested in how cold weather and additional factors affect charging times of different types of electric vehicles and if improvements in lithium-ion battery technology have addressed these effects. There is also research (Yuksel and Michalek 2015) on how regional temperatures affect the efficiency, range, and emissions of electric batteries. They noted that the ideal conditions for the most efficient battery life are in climates similar to those in the Pacific Northwest/West Coast (mild temperatures for much of the year) when compared to ‘extreme climates where the daily temperature might get very hot or very cold. It will be interesting to see how a harsh winter climate, such as Burlington, Vermont’s compares to the findings in these papers. 
 
 The motivation of this research is twofold. The first is to better understand the impact of cold weather and other factors that could better inform prospective EV buyers in cold climates. The second interest seeks to potentially solve a more difficult question: Does the City of Burlington have a sufficient charging infrastructure provided for both winter and summer months to meet future electric vehicle charging needs.
+
+
+### Bibliography
+ 
+Arias, M. B., & Bae, S. (2016). Electric vehicle charging demand forecasting model based on big 
+data technologies. Applied Energy, 183, 327–339. doi: 10.1016/j.apenergy.2016.08.080
+
+Brouwer, A. S., Kuramochi, T., Broek, M. V. D., & Faaij, A. (2013). Fulfilling the electricity 
+demand of electric vehicles in the long term future: An evaluation of centralized and 
+decentralized power supply systems. Applied Energy, 107, 33–51. doi: 10.1016/j.apenergy.2013.02.005
+
+Energy Action Network. (2018). The Benefits of Achieving Vermont’s Energy & Emissions 
+Commitments: 2018 Annual Progress Report.
+
+Jaguemont, J., et al. (2016). A comprehensive review of lithium-ion batteries used in hybrid and 
+electric vehicles at cold temperatures.  Applied Energy, 164, 99-114.
+
+Motoaki, Y., & Shirk, M. G. (2017). Consumer behavioral adaptation in EV fast charging through
+pricing. Energy Policy, 108, 178–183. doi: 10.1016/j.enpol.2017.05.051 
+
+Motoaki, Y., Yi, W., & Salisbury, S. (2018). Empirical analysis of electric vehicle fast charging 
+under cold temperatures. Energy Policy, 122, 162–168. doi: 10.1016/j.enpol.2018.07.036
+
+Yuksel, T & Michalek, J. J. (2015). Effects of Regional Temperature on Electric Vehicle 
+Efficiency, Range, and Emissions in the United States. Environmental Science Technology, 49, 3974-3980.
