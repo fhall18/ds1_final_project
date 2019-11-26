@@ -3,7 +3,7 @@
 ## The Effects of Temperature on Electric Vehicle Charging Across Time and Vehicle Model
 
 
-# Abstract
+### Abstract
 This project will conduct a statistical analysis to model the effects of temperature on charging an electric vehicle and how these effects have changed over time. This research will make use of public electric vehicle charging session data from the City of Burlington’s twenty-five commercial public Level 2 charging stations (240V/32A) and two 25-kW Direct Current Fast Chargers (DCFC). The first charging stations were installed in 2013 providing us with charging data continuing into the present. This information will allow us to develop an analysis that demonstrates any improvements in battery technology over the past six years that can additionally address cold-weather electric vehicle charging.
 
 # Overview and Motivation of Research Questions
