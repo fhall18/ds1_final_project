@@ -1,6 +1,6 @@
 # ds1_final_project
 
-# The Effects of Temperature on Electric Vehicle Charging Across Time and Vehicle Model
+## The Effects of Temperature on Electric Vehicle Charging Across Time and Vehicle Model
 
 
 # Abstract
