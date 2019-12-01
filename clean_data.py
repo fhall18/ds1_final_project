@@ -150,7 +150,7 @@ for i in range(list_len):
     else:
         avg_kw.append(None)
 print(avg_kw)
-
+#test
 # Start SOC
 # End SOC
 # Temp
