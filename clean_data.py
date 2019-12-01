@@ -16,7 +16,7 @@ from pytz import all_timezones
 
 
 ###############################################################################
-#### FORMATE DATA ####
+#### FORMAT DATA ####
 
 ### Weather Data
 messy_weather = pd.read_csv('weather_temp_2013-2019.csv')
