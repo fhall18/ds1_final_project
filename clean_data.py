@@ -19,7 +19,7 @@ from pytz import all_timezones
 #### FORMATE DATA ####
 
 ### Weather Data
-messy_weather = pd.read_csv('data/weather_temp_2013-2019.csv')
+messy_weather = pd.read_csv('weather_temp_2013-2019.csv')
 # delete unused columns
 del messy_weather['TOTAL']; del messy_weather['HR25']
 weather = pd.melt(messy_weather,
@@ -40,7 +40,7 @@ del weather['Hour']
 
 
 ### Charging sessions data
-messy_charging = pd.read_csv('data/btv_total_charging_sessions.csv')
+messy_charging = pd.read_csv('btv_total_charging_sessions.csv')
 
 # delete unused columns
 del messy_charging['Org Name']
@@ -137,6 +137,20 @@ charge_end_counts = collections.Counter(charge_end)
 ### CHARGING ###
 # Energy (kWh)
 # Average kW (formula: Energy (kWh) / Charging Time (hh:mm:ss))
+avg_kw = []
+energy = data["Energy (kWh)"]
+time = data["Charging Time (hh:mm:ss)"]
+list_len = len(energy)
+
+for i in range(list_len):
+    t = datetime.strptime(time[i], "%H:%M:%S").time()
+    t = t.hour + t.minute/60
+    if(t != 0):
+        avg_kw.append(energy[i]/t)
+    else:
+        avg_kw.append(None)
+print(avg_kw)
+
 # Start SOC
 # End SOC
 # Temp
@@ -160,6 +174,6 @@ charge_end_counts = collections.Counter(charge_end)
 
 ### Variables We Can Create ### 
 # vehicle battery size FORMULA: 
-    # max(Energy)
-    # Energy / (SOC End - SOC Start)
-    # Energy / (100 - SOC Start) if Ended By == Charger Stopped & Charge Duration < Total Duration
+# max(Energy)
+# Energy / (SOC End - SOC Start)
+# Energy / (100 - SOC Start) if Ended By == Charger Stopped & Charge Duration < Total Duration
