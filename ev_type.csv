@@ -1,0 +1,36 @@
+Make_Model,EV_type,Year,# in VT,Max Lvl 2 Charge (kW),Battery (kWh),DC compatable
+Toyota Prius,PHEV,2015,272,3.3,4.4,0
+Ford CMax,PHEV,2015,240,3.3,7.6,0
+Chevrolet Volt,PHEV,2015,156,3.3,18.4,0
+Ford Fussion,PHEV,2015,135,3.3,7.6,0
+BMW i3 REX,PHEV,2015,5,7.4,22,1
+BMW i8,PHEV,2015,1,7.4,7.1,1
+Cadillac ELR,PHEV,2015,1,3.3,17,0
+McLaren P1,PHEV,2015,1,3.3,5.4,0
+Nissan Leaf,AEV,2015,129,6.6,30,1
+Tesla Roadster S,AEV,2015,45,10,85,1
+Mitsubishi i-MiEV,AEV,2015,24,3.3,16,1
+Smart Electric Drive,AEV,2015,10,3.3,17.6,0
+Ford Focus,AEV,2015,12,6.6,23,0
+Volkswagon e-Golf,AEV,2015,8,6.6,24,1
+BMW i3 BEV,AEV,2015,2,7.4,22,1
+Toyota Prius,PHEV,2016,277,3.3,4.4,0
+Ford CMax,PHEV,2016,335,3.3,7.6,0
+Chevrolet Volt,PHEV,2016,249,3.3,18.4,0
+Ford Fussion,PHEV,2016,185,3.3,7.6,0
+BMW i3 REX,PHEV,2016,19,7.4,22,1
+BMW X5 XDrive40e,PHEV,2016,7,7.4,9,0
+Audi A3 e-Tron,PHEV,2016,6,6.6,8.8,
+Volvo XC90 T8,PHEV,2016,4,6.6,9.2,
+BMW i8,PHEV,2016,3,7.4,7.1,1
+Cadillac ELR,PHEV,2016,1,3.3,17,0
+McLaren P1,PHEV,2016,1,3.3,5.4,0
+Nissan Leaf,AEV,2016,145,6.6,30,1
+Tesla Model S,AEV,2016,62,10,85,1
+Mitsubishi i-MiEV,AEV,2016,25,3.3,16,1
+Smart Electric Drive,AEV,2016,12,3.3,17.6,0
+Tesla Model X,AEV,2016,10,10,90,1
+Ford Focus,AEV,2016,17,6.6,23,0
+Volkswagon e-Golf,AEV,2016,24,6.6,24,1
+Tesla Roadster,AEV,2016,5,10,90,1
+BMW i3 BEV,AEV,2016,3,7.4,22,1
