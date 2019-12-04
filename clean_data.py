@@ -124,6 +124,17 @@ counts = collections.Counter(driver_id)
 charge_end = data["Ended By"]
 charge_end_counts = collections.Counter(charge_end)
 
+print(data.keys())
+total_dur = data["Total Duration (hh:mm:ss)"]
+charge_t = data ["Charging Time (hh:mm:ss)"]
+t_vals = []
+for t in range(len(total_dur)):
+    if charge_t[t] < total_dur[t]:
+        t_vals.append(1)
+    else:
+        t_vals.append(1)
+data["Charge Time < Total Duration"] = t_vals
+
 # variables we care about:
 
 ### DATETIME ###
@@ -140,6 +151,7 @@ for d in date:
     yrs.append(d.year)
 yr_cts = Counter(yrs)
 print(yr_cts)
+
 ### CHARGING ###
 # Energy (kWh)
 # Average kW (formula: Energy (kWh) / Charging Time (hh:mm:ss))
@@ -158,21 +170,26 @@ for i in range(list_len):
 # print(avg_kw)
 
 ####BATTERY SIZE####
+# vehicle battery size FORMULA:
+# max(Energy)
+# Energy / (SOC End - SOC Start)
+# Energy / (100 - SOC Start) if Ended By == Charger Stopped & Charge Duration < Total Duration
+
 # Start SOC
 # End SOC
 start_soc = data["Start SOC"]
 end_soc = data["End SOC"]
 # to see how many start/end_soc are in columns
-ct = 0
-for i in start_soc:
-    if isinstance(i, str):
-        ct = ct + 1
-print(list_len, ct)
-ct2 = 0
-for j in end_soc:
-    if isinstance(j, str):
-        ct2 = ct2 + 1
-print(list_len, ct2)
+# ct = 0
+# for i in start_soc:
+#     if isinstance(i, str):
+        # ct = ct + 1
+# print(list_len, ct)
+# ct2 = 0
+# for j in end_soc:
+#     if isinstance(j, str):
+#         ct2 = ct2 + 1
+# print(list_len, ct2)
 
 
 battery_sizes = []
@@ -190,7 +207,8 @@ for i in range(list_len):
         except ZeroDivisionError:
             zero_division_ct = zero_division_ct + 1
 
-print(battery_sizes)
+# print(battery_sizes)
+#print(zero_division_ct)
 
 # Temp
 # Ended By (variable of how the session was terminated)
@@ -210,9 +228,3 @@ print(battery_sizes)
 # EV Make
 # EV Model
 # EV Year
-
-### Variables We Can Create ###
-# vehicle battery size FORMULA:
-# max(Energy)
-# Energy / (SOC End - SOC Start)
-# Energy / (100 - SOC Start) if Ended By == Charger Stopped & Charge Duration < Total Duration
