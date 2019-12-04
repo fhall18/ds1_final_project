@@ -153,22 +153,35 @@ for i in range(list_len):
 # End SOC
 start_soc = data["Start SOC"]
 end_soc = data["End SOC"]
-# battery_sizes = []
-# ct = 0
-# ct2 = 0
-# for i in range(list_len):
-#     # if start_soc[i] != "nan" and end_soc[i] != "nan":
-#     print(energy[i], end_soc[i], start_soc[i])
-#     if math.isnan(start_soc[i]):
-#         ct += 1
-#     if end_soc[i] == "nan":
-#         ct2 += 1
-# print('hi')
-# print(list_len, ct, ct2)
+# to see how many start/end_soc are in columns
+ct = 0
+for i in start_soc:
+    if isinstance(i, str):
+        ct = ct + 1
+print(list_len, ct)
+ct2 = 0
+for j in end_soc:
+    if isinstance(j, str):
+        ct2 = ct2 + 1
+print(list_len, ct2)
 
-        # battery_sizes.append(energy[i] / (end_soc - start_soc))
 
-# print(battery_sizes)
+battery_sizes = []
+zero_division_ct = 0
+for i in range(list_len):
+    if isinstance(start_soc[i], str) and isinstance(end_soc[i], str):
+        e = float(energy[i])
+        start = float(start_soc[i][:-1])
+        end = float(end_soc[i][:-1])
+
+        # print(e ,start, end)
+        try:
+            # battery_sizes.append(math.fabs(e / (end - start)))
+            battery_sizes.append(e / (end - start))
+        except ZeroDivisionError:
+            zero_division_ct = zero_division_ct + 1
+
+print(battery_sizes)
 
 # Temp
 # Ended By (variable of how the session was terminated)
