@@ -10,6 +10,7 @@ import collections
 import math
 from datetime import datetime
 from dateutil import tz
+from collections import Counter
 
 import pandas as pd
 from pytz import all_timezones
@@ -131,6 +132,14 @@ charge_end_counts = collections.Counter(charge_end)
 # Charging Time (hh:mm:ss)
 # Charge End (formula: "Start Date" + "Charge Duration")
 
+###NUMBER OF SESSIONS PER YEAR###
+# print(data.keys())
+date = data["Start Date"]
+yrs = []
+for d in date:
+    yrs.append(d.year)
+yr_cts = Counter(yrs)
+print(yr_cts)
 ### CHARGING ###
 # Energy (kWh)
 # Average kW (formula: Energy (kWh) / Charging Time (hh:mm:ss))
