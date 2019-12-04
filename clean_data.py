@@ -131,6 +131,7 @@ t_vals = []
 for t in range(len(total_dur)):
     if charge_t[t] < total_dur[t]:
         t_vals.append(1)
+        data.at["End SOC", t] = '100%'
     else:
         t_vals.append(1)
 data["Charge Time < Total Duration"] = t_vals
