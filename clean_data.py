@@ -227,9 +227,14 @@ for i in range(len(start_soc)):
     if end_soc[i] < start_soc[i]:
         end_soc[i] = 1
 
+# change in SOC
+change_soc = []
+for i in range(len(start_soc)):
+    change_soc.append(end_soc[i] - start_soc[i])
 
 data['Start_SOC'] = start_soc
 data['End_SOC'] = end_soc
+data['Change_SOC'] = change_soc
 
 
 #### Save Tidy Data ###########################################################
@@ -295,9 +300,9 @@ data.to_csv('data/dcfc_tidy.csv', sep=',', encoding='utf-8')
 # Driver Postal Code ??
 
 ### Variables We Want ###
-# EV Make
-# EV Model
-# EV Year
+# EV Make                           Not yet, kinda hard...
+# EV Model                          Not yet, kinda hard...
+# EV Year                           Done
 
 ### Variables We Can Create ### 
 # vehicle battery size FORMULA: 
