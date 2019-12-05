@@ -198,6 +198,7 @@ avg_kw = []
 energy = data["energy"]
 time = data["charge_time"]
 list_len = len(energy)
+port_type = data['Port_Type']
 
 for i in range(list_len):
     t = datetime.strptime(time[i], "%H:%M:%S").time()
@@ -207,18 +208,24 @@ for i in range(list_len):
     else:
         avg_kw.append(None)
 
-
+kw = pd.DataFrame()
+kw['energy'] = energy
+kw['time'] = time
+kw['kw'] = avg_kw
+kw['port_type'] = port_type
 
 #### MERGE 2 ##################################################################
-data = data.merge(driver_stats, on='User_ID')
 data['avg_kw'] = avg_kw
+data = data.merge(driver_stats, on='User_ID')
+
 
 
 #### DCFC DATA ################################################################
 
 # filters
 data = data[data.Port_Type == 'DC Fast']
-data = data[data.avg_kw < 40] # strange datapoint higher than 40 kW...
+#data = data[data.avg_kw < 40] # strange datapoint higher than 40 kW...
+#data = data[data.energy > 5]
 data = data[data.Start_SOC.notnull()]
 
 print(data.shape)
@@ -233,21 +240,34 @@ energy_series = data['energy']
 #charge_time = data['charge_time']
 
 
-start_soc = series_to_list_of_percents(soc_a)
+
+#start_soc = series_to_list_of_percents(soc_a)
+start_soc = []
+for i in soc_a:
+    num = i[:-1]
+    num = int(num)
+    start_soc.append(num)
+
 end_soc = series_to_list_of_percents(soc_b)
+end_soc = []
+for i in soc_b:
+    num = i[:-1]
+    num = int(num)
+    end_soc.append(num)
+
 battery = series_to_list_of_nums(battery_series)
 energy = series_to_list_of_nums(energy_series)  
 
 
 for i in range(len(start_soc)):
     if end_soc[i] < start_soc[i]:
-        soc_e = energy[i]/battery[i]
-        if (soc_e + start_soc[i]) <= 1:
+        soc_e = energy[i]/battery[i]*100
+        if (soc_e + start_soc[i]) <= 100:
             end_soc[i] = (soc_e + start_soc[i])
         else:
             end_soc[i] = soc_e
     if end_soc[i] < start_soc[i]:
-        end_soc[i] = 1
+        end_soc[i] = 100
 
 # change in SOC
 change_soc = []
@@ -259,77 +279,7 @@ data['End_SOC'] = end_soc
 data['Change_SOC'] = change_soc
 
 
+
 #### Save Tidy Data ###########################################################
 data.to_csv('data/dcfc_tidy.csv', sep=',', encoding='utf-8')
-
 dcfc_ami.to_csv('data/dcfc_ami_tidy.csv', sep=',', encoding='utf-8')
-
-# VARIABLES NEEDED
-
-# END SOC CLEANER
-# CHANGE IN SOC
-
-#battery_sizes = []
-#zero_division_ct = 0
-#for i in range(list_len):
-#    if isinstance(start_soc[i], str) and isinstance(end_soc[i], str):
-#        e = float(energy[i])
-#        start = float(start_soc[i][:-1])
-#        end = float(end_soc[i][:-1])
-#
-#        # print(e ,start, end)
-#        try:
-#            # battery_sizes.append(math.fabs(e / (end - start)))
-#            battery_sizes.append(e / (end - start))
-#        except ZeroDivisionError:
-#            zero_division_ct = zero_division_ct + 1
-#
-
-
-
-
-
-
-# facit by starting SOC
-
-
-
-# variables we care about: 
-
-### DATETIME ###
-# Start Date
-# End Date
-# Charging Time (hh:mm:ss)
-# Charge End (formula: "Start Date" + "Charge Duration")
-
-### CHARGING ###
-# Energy (kWh)
-# Average kW (formula: Energy (kWh) / Charging Time (hh:mm:ss))
-# Start SOC
-# End SOC
-# Temp
-# Ended By (variable of how the session was terminated)
-# Full Charge (binary variable - Formula:
-    # if Ended By == "Driver Unplugged" & total duration > charge duration
-
-
-
-### EVSE ###
-# Address 1
-# Port Type
-# Ended By
-
-### Driver ###
-# User_ID
-# Driver Postal Code ??
-
-### Variables We Want ###
-# EV Make                           Not yet, kinda hard...
-# EV Model                          Not yet, kinda hard...
-# EV Year                           Done
-
-### Variables We Can Create ### 
-# vehicle battery size FORMULA: 
-    # max(Energy)
-    # Energy / (SOC End - SOC Start)
-    # Energy / (100 - SOC Start) if Ended By == Charger Stopped & Charge Duration < Total Duration
