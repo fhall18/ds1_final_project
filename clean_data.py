@@ -194,7 +194,6 @@ data = data[data.avg_kw < 30] # strange datapoint higher than 30 kW...
 data = data[data.Start_SOC.notnull()]
 data = data[data.charge_time > '00:05:00']
 
-print(data.shape)
 
 # change SOC to numbers
 soc_a = data['Start_SOC']
@@ -244,6 +243,16 @@ data['Start_SOC'] = start_soc
 data['End_SOC'] = end_soc
 data['Change_SOC'] = change_soc
 
+
+# creating dummy variables for model year
+data['year_2019'] = (data['model_year']==2019).astype(int)
+data['year_2018'] = (data['model_year']==2018).astype(int)
+data['year_2017'] = (data['model_year']==2017).astype(int)
+data['year_2016'] = (data['model_year']==2016).astype(int)
+data['year_2015'] = (data['model_year']==2015).astype(int)
+data['year_2014'] = (data['model_year']==2014).astype(int)
+
+print(data.shape)
 
 #### Save Tidy Data ###########################################################
 data.to_csv('data/dcfc_tidy.csv', sep=',', encoding='utf-8')
