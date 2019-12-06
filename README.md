@@ -8,7 +8,7 @@
 #### -clean_data.py
 #### -analysis.py
 #### -data
-
+##
 ### * clean_data.py
 #### 1. This file should be run first.
 #### 2. This file takes in all data files, cleans them, and calculates necessary variables and equations for analysis.
@@ -16,11 +16,10 @@
 ##### -dcfc_ami.csv
 ##### -weather_temp_2013-2019.csv
 #####  -ev_type.csv
- 
 #### 3. Outputs:
 #####  -dcfc_tidy.csv
 #####  -dcfc_ami_tidy.csv
- 
+ ##
 ### * analysis.py
 #### 1. This file includes all calculations necessary for the EDA and analysis of our datasets. 
 #### 2. Outputs:
@@ -37,7 +36,7 @@
 #####  -Rate of charge vs. Temperature based on 15 minute interval data (AMI Data)
 #####  -Linear Regression on Effect of Temperature on Average Charging Rate
 #####  -Effect of Temperature by Model Year (2013-2015, 2016-2019)
- 
+ ##
 ### * Data:
 #### 1. btv_total_charging_sessions.csv
 ##### -Features: 
