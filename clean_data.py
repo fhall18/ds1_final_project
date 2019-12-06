@@ -257,6 +257,11 @@ data['year_2014'] = (data['model_year']==2014).astype(int)
 
 print(data.shape)
 
+#### MAPPING DATA #############################################################
+mapping = charging[['Start Date Truncated','total_time','charge_time','EVSE ID',
+                    'Latitude','Longitude',]]
+
 #### Save Tidy Data ###########################################################
 data.to_csv('data/dcfc_tidy.csv', sep=',', encoding='utf-8')
 dcfc_ami.to_csv('data/dcfc_ami_tidy.csv', sep=',', encoding='utf-8')
+mapping.to_csv('data/mapping_tidy.csv', sep=',', encoding='utf-8')
