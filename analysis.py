@@ -18,7 +18,7 @@ import statsmodels.stats.api as sms
 from datetime import datetime
 import seaborn as sns
 import scipy, scipy.stats
-
+sns.set(font_scale=1.5)
 #### FUNCTIONS ################################################################
 
 
@@ -162,10 +162,11 @@ plt.scatter(kw,temp,c=ami['Year'], alpha = .7)
 plt.title('AMI Maximum Demand by Temperature', fontsize = 20)
 plt.xlabel('Rate of Charge (kW)', fontsize=14)
 plt.ylabel('Temperature (F)', fontsize=16)
-plt.colorbar()
+plt.colorbar(label='Year')
 plt.legend()
 plt.show()
 fig6.savefig('stats/ami_dcfc_peak_demand_by_day', bbox_inches='tight')
+
 
 g = sns.FacetGrid(ami, col="Year")
 g.map(plt.scatter, "demand", "Temp", alpha=.7)
@@ -191,7 +192,7 @@ plt.scatter(temp,avg_kw_rate,c = dcfc1['model_year'], alpha = .7)
 plt.title('Effect of Temperature on Fast Charging', fontsize = 20)
 plt.xlabel('Temperature (F)', fontsize=14)
 plt.ylabel('Rate of Charge (kW)', fontsize=16)
-plt.colorbar()
+plt.colorbar(label='model year')
 plt.legend()
 plt.show()
 fig7.savefig('stats/dcfc_linear_regression', bbox_inches='tight')
@@ -210,6 +211,7 @@ dcfc2 = dcfc[dcfc.Start_SOC < 60]
 # create splits to fit as two sets
 a = dcfc2[dcfc2.model_year<2016]
 b = dcfc2[dcfc2.model_year>2015]
+
 
 # 2013-2015
 fig8 = plt.figure()
