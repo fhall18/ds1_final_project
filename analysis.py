@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+
 """
 Created on Tue Dec  3 19:18:26 2019
 UNCANNYHORSE DS1 FINAL
@@ -13,6 +14,7 @@ import scipy, scipy.stats
 import numpy as np
 import statsmodels as sm
 import statsmodels.formula.api as smf
+import statsmodels.stats.api as sms
 from datetime import datetime
 import seaborn as sns
 import scipy, scipy.stats
@@ -49,7 +51,17 @@ print(sum_data)
 # sum of null values
 dcfc.isnull().sum()
 
+# counts of dummy variables
+dcfc['year_2019'].value_counts()
+dcfc['year_2018'].value_counts()
+dcfc['year_2017'].value_counts()
+dcfc['year_2016'].value_counts()
+dcfc['year_2015'].value_counts()
+dcfc['year_2014'].value_counts()
 
+(dcfc['year_2019'].value_counts()+dcfc['year_2018'].value_counts()+dcfc['year_2017'].value_counts()
++dcfc['year_2016'].value_counts()+dcfc['year_2015'].value_counts()+dcfc['year_2014'].value_counts()
+-len(dcfc))
 #### simple regression
 avg_kw_rate = dcfc['avg_kw']
 temp = dcfc['Temp']
@@ -86,6 +98,7 @@ corr = corr_data.corr()
 # regression with dummy variables
 model = smf.ols('avg_kw ~ Temp + Start_SOC + battery_size + year_2019 + year_2018 + year_2017 + year_2016 + year_2015 + year_2014', data=dcfc).fit()
 print(model.summary())
+
 
 # regression without dummy variables
 model = smf.ols('avg_kw ~ Temp + Start_SOC + battery_size', data=dcfc).fit()
@@ -125,7 +138,6 @@ model = smf.ols('avg_kw ~ year_2019 + year_2018 + year_2017 + year_2016 + year_2
 print(model.summary())
 
 
-####### FREDDDIE  HERE
 # AMI
 dt = ami['INTERVAL_TIME']
 date = []
@@ -176,24 +188,41 @@ plt.scatter(dcfc['avg_kw'],dcfc['Temp'],c = dcfc['model_year'], alpha = .7)
 plt.title('Charging Rate by Temperature', fontsize = 20)
 plt.xlabel('Rate of Charge (kW)', fontsize=14)
 plt.ylabel('Temperature (F)', fontsize=16)
-plt.colorbar()
 plt.legend()
+clb = plt.colorbar()
+clb.ax.get_yaxis().labelpad = 15
+clb.ax.set_ylabel('Model Year', rotation=270)
 plt.show()
 fig7.savefig('stats/dcfc_linear_regression', bbox_inches='tight')
 
-# facit - split into two sets
+##### facet - split into two sets
 a = dcfc[dcfc.model_year<2016]
 b = dcfc[dcfc.model_year>2015]
 
-fig8 = plt.figure()
+
+# 2013-2015
+plt.figure()
+ax = plt.subplot()
 g = sns.FacetGrid(a, col="model_year")
 g.map(plt.scatter, "avg_kw", "Temp", alpha=.7)
 g.add_legend()
-fig8.savefig('stats/model_year_facit_a', bbox_inches='tight')
+plt.show()
+g.savefig('stats/model_year_facet_a', bbox_inches='tight')
 
-fig9 = plt.figure()
+
+# 2016-2019
+plt.figure()
+ax = plt.subplot()
 g = sns.FacetGrid(b, col="model_year")
 g.map(plt.scatter, "avg_kw", "Temp", alpha=.7)
 g.add_legend()
-fig9.savefig('stats/model_year_facit_b', bbox_inches='tight')
+plt.show()
+g.savefig('stats/model_year_facet_b', bbox_inches='tight')
+
+
+
+
+
+
+
 
