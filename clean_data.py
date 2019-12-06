@@ -12,21 +12,6 @@ import matplotlib.pyplot as plt
 
 #### FUNCTIONS ################################################################
 
-def get_lists(d):
-    lat = []
-    lon = []
-    temp = []
-    time = []
-    for coord, val in zip(d.keys(), d.values()):
-        lat.append(coord[1])
-        lon.append(coord[0])
-        temp.append(val['total_temp'] / val['ct'])
-        # t = datetime.strptime(val['total_time'], "%H:%M:%S").time()
-        # t = t.hour + t.minute / 60
-        time.append(val['total_time'] / val['ct'])
-    return lat, lon, temp, time
-
-
 def series_to_list_of_nums(some_series):
     some_list = []
     for i in some_series:
@@ -34,7 +19,6 @@ def series_to_list_of_nums(some_series):
         some_list.append(num)
 
     return some_list
-
 
 def series_to_list_of_percents(some_series):
     some_list = []
