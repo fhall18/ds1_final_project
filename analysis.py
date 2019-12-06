@@ -138,7 +138,7 @@ model = smf.ols('avg_kw ~ year_2019 + year_2018 + year_2017 + year_2016 + year_2
 print(model.summary())
 
 
-# AMI
+##### AMI DATA ################################################################
 dt = ami['INTERVAL_TIME']
 date = []
 for i in range(len(dt)):
@@ -147,82 +147,79 @@ for i in range(len(dt)):
 
 ami['date'] = date
 # filter only top on each date
-ami = ami.groupby('date').head(1)
+ami['dt_month']=ami['date'].apply(lambda x : x.replace(day=1))
+ami = ami.groupby('dt_month').head(10)
+#ami = ami.groupby('date').head(1)
 
 kw = ami['demand']
 temp = ami['Temp']
 slope, intercept, r_value, p_value, std_err = scipy.stats.linregress(kw,temp)
 line = [ slope*xi + intercept for xi in kw]
 
-#fig6 = plt.figure()
-#plt.scatter(dcfc['energy'],dcfc['Temp'])
-#plt.plot(kw,line,'r-',linewidth=5,label='linear regression')
-#plt.scatter(ami['demand'],ami['Temp'],c=ami['Year'], alpha = .7)
-#plt.title('Charging Rate by Temperature', fontsize = 20)
-#plt.xlabel('Rate of Charge (kW)', fontsize=14)
-#plt.ylabel('Temperature (F)', fontsize=16)
-#plt.colorbar()
-#plt.legend()
-#plt.show()
-#fig6.savefig('stats/ami_dcfc_peak_demand_by_day', bbox_inches='tight')
-
-#g = sns.FacetGrid(ami, col="Year")
-#g.map(plt.scatter, "demand", "Temp", alpha=.7)
-#g.add_legend()
-
-##### DCFC Session Data #####
-dcfc = dcfc[dcfc.Start_SOC < 40]
-#dcfc = dcfc[dcfc.energy > 5]
-dcfc = dcfc[dcfc.charge_time > '00:20:00']
-
-# simple regression
-avg_kw_rate = dcfc['avg_kw']
-temp = dcfc['Temp']
-slope, intercept, r_value, p_value, std_err = scipy.stats.linregress(avg_kw_rate,temp)
-line = [ slope*xi + intercept for xi in avg_kw_rate]
-
-#plt.scatter(dcfc['energy'],dcfc['Temp'])
-fig7 = plt.figure()
-plt.plot(avg_kw_rate,line,'r-',linewidth=5,label='linear regression')
-plt.scatter(dcfc['avg_kw'],dcfc['Temp'],c = dcfc['model_year'], alpha = .7)
+fig6 = plt.figure()
+plt.plot(kw,line,'r-',linewidth=5,label='linear regression')
+plt.scatter(kw,temp,c=ami['Year'], alpha = .7)
 plt.title('Charging Rate by Temperature', fontsize = 20)
 plt.xlabel('Rate of Charge (kW)', fontsize=14)
 plt.ylabel('Temperature (F)', fontsize=16)
+plt.colorbar()
 plt.legend()
-clb = plt.colorbar()
-clb.ax.get_yaxis().labelpad = 15
-clb.ax.set_ylabel('Model Year', rotation=270)
+plt.show()
+fig6.savefig('stats/ami_dcfc_peak_demand_by_day', bbox_inches='tight')
+
+g = sns.FacetGrid(ami, col="Year")
+g.map(plt.scatter, "demand", "Temp", alpha=.7)
+g.add_legend()
+
+##### DCFC Session Data #######################################################
+dcfc1 = dcfc[dcfc.Start_SOC < 40]
+dcfc1 = dcfc1[dcfc1.charge_time > '00:20:00']
+
+
+# simple regression
+avg_kw_rate = dcfc1['avg_kw']
+temp = dcfc1['Temp']
+slope, intercept, r_value, p_value, std_err = scipy.stats.linregress(temp,avg_kw_rate)
+line = [ slope*xi + intercept for xi in temp]
+slope = round(slope,3)
+r_value = round(r_value,3)
+
+# DCFC effect of temperature on average charging rate 
+fig7 = plt.figure()
+plt.plot(temp,line,'r-',linewidth=5,label='Linear Regression \n slope: {} \n r-value{}'.format(slope,r_value))
+plt.scatter(temp,avg_kw_rate,c = dcfc1['model_year'], alpha = .7)
+plt.title('Effect of Temperature on Fast Charging', fontsize = 20)
+plt.xlabel('Temperature (F)', fontsize=14)
+plt.ylabel('Rate of Charge (kW)', fontsize=16)
+plt.colorbar()
+plt.legend()
 plt.show()
 fig7.savefig('stats/dcfc_linear_regression', bbox_inches='tight')
 
-##### facet - split into two sets
-a = dcfc[dcfc.model_year<2016]
-b = dcfc[dcfc.model_year>2015]
+# print linear regression details
+print("slope", slope)
+print("r_value", r_value)
+print("p_value", p_value)
+print("std_err", std_err)
 
+
+# facit 2 - effect of temperature by model year
+
+# filtering
+dcfc2 = dcfc[dcfc.Start_SOC < 60]
+# create splits to fit as two sets
+a = dcfc2[dcfc2.model_year<2016]
+b = dcfc2[dcfc2.model_year>2015]
 
 # 2013-2015
-plt.figure()
-ax = plt.subplot()
-g = sns.FacetGrid(a, col="model_year")
-g.map(plt.scatter, "avg_kw", "Temp", alpha=.7)
-g.add_legend()
-plt.show()
-g.savefig('stats/model_year_facet_a', bbox_inches='tight')
-
+fig8 = plt.figure()
+g = sns.lmplot(x="avg_kw", y="Temp", col="model_year", data=a,
+           aspect=1, ci=None, line_kws={'color':'red'})
+g.savefig('stats/model_year_facit_a', bbox_inches='tight')
 
 # 2016-2019
 plt.figure()
-ax = plt.subplot()
-g = sns.FacetGrid(b, col="model_year")
-g.map(plt.scatter, "avg_kw", "Temp", alpha=.7)
-g.add_legend()
-plt.show()
-g.savefig('stats/model_year_facet_b', bbox_inches='tight')
-
-
-
-
-
-
-
+g = sns.lmplot(x="avg_kw", y="Temp", col="model_year", data=b,
+           aspect=1, ci=None, line_kws={'color':'red'})
+g.savefig('stats/model_year_facit_b', bbox_inches='tight')
 
