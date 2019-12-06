@@ -3,7 +3,7 @@
 ## The Effects of Temperature on Electric Vehicle Charging Across Time and Vehicle Model
 
 
-### Included:
+## Included:
 #### -README.md
 #### -clean_data.py
 #### -analysis.py
@@ -12,31 +12,31 @@
 ### clean_data.py
 1. This file should be run first.
 2. This file takes in all data files, cleans them, and calculates necessary variables and equations for analysis.
- -btv_total_charging_sessions.csv
- -dcfc_ami.csv
- -weather_temp_2013-2019.csv
- -ev_type.csv
+##### -btv_total_charging_sessions.csv
+##### -dcfc_ami.csv
+##### -weather_temp_2013-2019.csv
+#####  -ev_type.csv
  
 3. Outputs:
- -dcfc_tidy.csv
- -dcfc_ami_tidy.csv
+#####  -dcfc_tidy.csv
+#####  -dcfc_ami_tidy.csv
  
 ### analysis.py
 1. This file includes all calculations necessary for the EDA and analysis of our datasets. 
 2. Outputs:
- -summary statistics from dcfc tidy data file
- -simple regression on dcfc tidy data file
- -multiple linear regression on dcfc tidy data file
-  +Average kW vs. Temperature
-  +Average kW vs. Initial State of Charge
-  +Average kW vs. Battery Size
- -Check Collinearity between Temperature, Initial State of Charge, and Batter Size
- -Histogram of change in initial and end state of charge
- -How Battery Size Accounts for Temperature's effects on average kW
- -How Model Year Might Change How Temperature Affects Average kW
- -Rate of charge vs. Temperature based on 15 minute interval data (AMI Data)
- -Linear Regression on Effect of Temperature on Average Charging Rate
- -Effect of Temperature by Model Year (2013-2015, 2016-2019)
+#####  -summary statistics from dcfc tidy data file
+#####  -simple regression on dcfc tidy data file
+#####  -multiple linear regression on dcfc tidy data file
+#####   +Average kW vs. Temperature
+#####   +Average kW vs. Initial State of Charge
+#####   +Average kW vs. Battery Size
+#####  -Check Collinearity between Temperature, Initial State of Charge, and Batter Size
+#####  -Histogram of change in initial and end state of charge
+#####  -How Battery Size Accounts for Temperature's effects on average kW
+#####  -How Model Year Might Change How Temperature Affects Average kW
+#####  -Rate of charge vs. Temperature based on 15 minute interval data (AMI Data)
+#####  -Linear Regression on Effect of Temperature on Average Charging Rate
+#####  -Effect of Temperature by Model Year (2013-2015, 2016-2019)
  
 ### Data:
 1. btv_total_charging_sessions.csv
