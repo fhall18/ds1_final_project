@@ -243,6 +243,9 @@ data['Start_SOC'] = start_soc
 data['End_SOC'] = end_soc
 data['Change_SOC'] = change_soc
 
+# filter soc again
+data = data[data.Start_SOC > 0]
+data = data[data.End_SOC > 0]
 
 # creating dummy variables for model year
 data['year_2019'] = (data['model_year']==2019).astype(int)
