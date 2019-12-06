@@ -97,83 +97,39 @@ print(model.summary())
 
 ####################################
 
-plt.scatter(dcfc['energy'],dcfc['Temp'])
-plt.plot(avg_kw_rate,line,'r-',linewidth=5,label='linear regression')
-plt.scatter(dcfc['avg_kw'],dcfc['Temp'],c = dcfc['Start_SOC'], alpha = .7)
-plt.title('Charging Rate by Temperature', fontsize = 20)
-plt.xlabel('Rate of Charge (kW)', fontsize=14)
-plt.ylabel('Temperature (F)', fontsize=16)
-plt.colorbar()
-plt.legend()
-plt.show()
-
-
-
-
 #### histogram of change in soc before, change in soc after
-plt.figure()
+fig4 = plt.figure()
 plt.hist(dcfc['Start_SOC'], bins='auto', density=True,
 color='#424FA4')
 plt.hist(dcfc['End_SOC'], bins='auto', density=True,
 color='#4FA442', alpha=0.5)
-plt.xlabel('Change in State of Charge (SOC)')
+plt.xlabel('State of Charge (SOC)')
 plt.ylabel('P(x)')
-plt.legend(['Change in SOC Before', 'Change in SOC After'], fontsize=14)
+plt.legend(['Start SOC', 'End SOC'], fontsize=14)
 plt.show()
+fig4.savefig('ComparingSOCs', bbox_inches='tight')
 
 # change in SOC
 dcfc['SOC_change'] = dcfc['End_SOC'] - dcfc['Start_SOC']
-plt.figure()
-plt.hist(dcfc['SOC_change'])
+fig5 = plt.figure()
+plt.hist(dcfc['SOC_change'], bins=25)
 plt.ylabel('Frequency')
 plt.xlabel('Change in SOC (percentage point)')
 plt.show()
+fig5.savefig('DistChangeSOC', bbox_inches='tight')
 
-
-
-#### change in soc by time duration (temperature colored)
-cm = plt.cm.get_cmap('viridis')
-plt.figure()
-sc = plt.scatter(dcfc['total_time'], dcfc['SOC_change'], 
-c=dcfc['Temp'], vmin=-20, vmax=100, cmap=cm)
-plt.colorbar(sc)
-plt.show()
 
 ### How battery size changes how temperature affects avg_kw
-plt.figure()
-ax = plt.subplots()
-cm = plt.cm.get_cmap('viridis')
-sc1 = plt.scatter(dcfc['Temp'], dcfc['avg_kw'],
-c=dcfc['battery_size'], vmin=0, vmax=50, cmap=cm)
-cbar = plt.colorbar(sc1)
-cbar.ax.get_yaxis().labelpad = 15
-cbar.ax.set_ylabel('Battery Size kWh',rotation=270)
-plt.xlabel('Temperature (in Fahrenheit)')
-plt.ylabel('Average KW')
-plt.show()
-
 model = smf.ols('avg_kw ~ battery_size + Temp + battery_size*Temp', data=dcfc).fit()
 print(model.summary())
 
 
 ### How model year changes how temperature affects avg_kw
-plt.figure()
-ax = plt.subplots()
-cm = plt.cm.get_cmap('viridis')
-sc2 = plt.scatter(dcfc['Temp'], dcfc['avg_kw'],
-c=dcfc['year_2019'], vmin=0, vmax=1, cmap=cm)
-cbar = plt.colorbar(sc2)
-cbar.ax.get_yaxis().labelpad = 15
-cbar.ax.set_ylabel('2019 (1 = yes and 0 = no)', rotation=270)
-plt.xlabel('Temperature (in Fahrenheit)')
-plt.ylabel('Average KW')
-plt.show()
-
 model = smf.ols('avg_kw ~ year_2019 + year_2018 + year_2017 + year_2016 + year_2015 + year_2014 + Temp + year_2019*Temp + year_2018*Temp + year_2017*Temp + year_2016*Temp + year_2015*Temp + year_2014*Temp', data=dcfc).fit()
 print(model.summary())
 
 
-
+####### FREDDDIE  HERE
 
 
 
