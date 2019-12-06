@@ -10,8 +10,8 @@
 #### -data
 
 ### clean_data.py
-1. This file should be run first.
-2. This file takes in all data files, cleans them, and calculates necessary variables and equations for analysis.
+#### 1. This file should be run first.
+#### 2. This file takes in all data files, cleans them, and calculates necessary variables and equations for analysis.
 ##### -btv_total_charging_sessions.csv
 ##### -dcfc_ami.csv
 ##### -weather_temp_2013-2019.csv
@@ -22,8 +22,8 @@
 #####  -dcfc_ami_tidy.csv
  
 ### analysis.py
-1. This file includes all calculations necessary for the EDA and analysis of our datasets. 
-2. Outputs:
+#### 1. This file includes all calculations necessary for the EDA and analysis of our datasets. 
+#### 2. Outputs:
 #####  -summary statistics from dcfc tidy data file
 #####  -simple regression on dcfc tidy data file
 #####  -multiple linear regression on dcfc tidy data file
@@ -39,26 +39,26 @@
 #####  -Effect of Temperature by Model Year (2013-2015, 2016-2019)
  
 ### Data:
-1. btv_total_charging_sessions.csv
- -Features: Start Date
-   Start Time Zone
-   End Date
-   End Time Zone
-   total_time
-   charge_time
-   energy
-   Port_Type
-   Port Number
-   Plug Type
-   EVSE ID
-   Address 1
-   Latitude
-   Longitude
-   Fee
-   Ended_By
-   Plug In Event Id
-   Driver Postal Code
-   User_ID
+#### 1. btv_total_charging_sessions.csv
+##### -Features: Start Date
+######   Start Time Zone
+######  End Date
+######   End Time Zone
+######   total_time
+######   charge_time
+######   energy
+######   Port_Type
+######   Port Number
+######   Plug Type
+######   EVSE ID
+######   Address 1
+ ######  Latitude
+ ######  Longitude
+ ######  Fee
+ ######  Ended_By
+ ######  Plug In Event Id
+ ######  Driver Postal Code
+ ######  User_ID
    Start_SOC
    End_SOC
    County
