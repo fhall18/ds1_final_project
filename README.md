@@ -39,6 +39,7 @@
  ##
 ### * Data:
 #### 1. btv_total_charging_sessions.csv
+##### This dataset was our main store of information. This dataset provided most of the information we needed, attributes like time, charge time, total charge time, battery state of charge, etc. 
 ###### -Features: 
 ###### Start Date
 ######   Start Time Zone
@@ -79,11 +80,13 @@
 ######   year_2015
 ######   year_2014
 #### 2. dcfc_ami.csv
+##### AMI stands for Advanced Metering Infrastructure. This dataset gave us fifteen minute interval energy data which recorded the energy use (kW-15) of the DCFC located on 75 S. Winooski Ave.
 ###### -features:
 ######   INTERVAL_TIME
 ######   LOCID
 ######   LP_VALUE
 #### 3. weather_temp_2013-2019.csv
+##### This dataset was used to gather our temperature data. We merged this dataset with btv_total_charging_sessions.csv and dcfc_ami.csv based on time. 
 ###### features:
  ######  Year
 ######   Month
@@ -113,6 +116,7 @@
 ######   HR23
 ######   HR24
 #### 4. ev_type.csv
+##### -This dataset was used as reference for us when looking at electric vehicle models.
 ######   -features:
 ######   Make_Model
 ######   EV_type
