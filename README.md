@@ -17,7 +17,7 @@
 ##### -weather_temp_2013-2019.csv
 #####  -ev_type.csv
  
-3. Outputs:
+#### 3. Outputs:
 #####  -dcfc_tidy.csv
 #####  -dcfc_ami_tidy.csv
  
@@ -40,7 +40,8 @@
  
 ### Data:
 #### 1. btv_total_charging_sessions.csv
-##### -Features: Start Date
+##### -Features: 
+###### Start Date
 ######   Start Time Zone
 ######  End Date
 ######   End Time Zone
@@ -59,66 +60,66 @@
  ######  Plug In Event Id
  ######  Driver Postal Code
  ######  User_ID
-   Start_SOC
-   End_SOC
-   County
-   System S/N
-   Model Number
-   Start Date Truncated
-   End Date Truncated
-   Year
-   Temp
-   avg_kw
-   battery_size
-   model_year
-   Change_SOC
-   year_2019
-   year_2018
-   year_2017
-   year_2016
-   year_2015
-   year_2014
-2. dcfc_ami.csv
- -features:
-   INTERVAL_TIME
-   LOCID
-   LP_VALUE
-3. weather_temp_2013-2019.csv
- features:
-   Year
-   Month
-   Day
-   HR01
-   HR02
-   HR03
-   HR04
-   HR05
-   HR06
-   HR07
-   HR08
-   HR09
-   HR10
-   HR11
-   HR12
-   HR13
-   HR14
-   HR15
-   HR16
-   HR17
-   HR18
-   HR19
-   HR20
-   HR21
-   HR22
-   HR23
-   HR24
-4. ev_type.csv
-   -features:
-   Make_Model
-   EV_type
-   Year
-   \# in VT
-   Max Lvl 2 Charge (kW)
-   Battery (kWh)
-   DC compatable
+######   Start_SOC
+######   End_SOC
+######   County
+ ######  System S/N
+ ######  Model Number
+ ######  Start Date Truncated
+ ######  End Date Truncated
+ ######  Year
+ ######  Temp
+ ######  avg_kw
+ ######  battery_size
+ ######  model_year
+ ######  Change_SOC
+ ######  year_2019
+######   year_2018
+######   year_2017
+######   year_2016
+######   year_2015
+######   year_2014
+#### 2. dcfc_ami.csv
+###### -features:
+######   INTERVAL_TIME
+######   LOCID
+######   LP_VALUE
+#### 3. weather_temp_2013-2019.csv
+###### features:
+ ######  Year
+######   Month
+######   Day
+######   HR01
+######   HR02
+######   HR03
+######   HR04
+######   HR05
+######   HR06
+######   HR07
+######   HR08
+######   HR09
+######   HR10
+######   HR11
+######   HR12
+######   HR13
+######   HR14
+ ######  HR15
+ ######  HR16
+######   HR17
+######   HR18
+######   HR19
+######   HR20
+######   HR21
+######   HR22
+######   HR23
+######   HR24
+####4. ev_type.csv
+######   -features:
+######   Make_Model
+######   EV_type
+######   Year
+######   \# in VT
+######   Max Lvl 2 Charge (kW)
+######   Battery (kWh)
+######   DC compatable
  
