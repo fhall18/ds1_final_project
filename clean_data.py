@@ -6,13 +6,8 @@ Created on Fri Nov 22 22:10:38 2019
 @author: fhall, spell, jhardy
 """
 #### IMPORTS ##################################################################
-import collections
 from datetime import datetime
-from dateutil import tz
-from matplotlib import pyplot as plt
-import numpy as np
 import pandas as pd
-from pytz import all_timezones
 
 #### FUNCTIONS ################################################################
 
@@ -38,7 +33,6 @@ def series_to_list_of_percents(some_series):
 
 ####################
 #### AMI DATA ######
-
 dcfc_ami = pd.read_csv('data/dcfc_ami.csv')
 
 energy = dcfc_ami['LP_VALUE']
@@ -71,6 +65,7 @@ weather = pd.melt(messy_weather,
                   var_name = 'Hour',
                   value_name = 'Temp'
                   )
+
 # create datetime
 weather['Hour'] = weather.Hour.str.slice(2,4).astype(int)-1
 weather['datetime'] = pd.to_datetime(weather[['Year', 'Month', 'Day', 'Hour']])
@@ -100,43 +95,16 @@ del messy_charging['Station Name']
 
 
 # convert to datetime
-#messy_charging['Start Date'] = pd.to_datetime(messy_charging['Start Date'],infer_datetime_format=True)
 messy_charging['Start Date'] = pd.to_datetime(messy_charging['Start Date'],format='%Y-%m-%d %H:%M:%S')
-#messy_charging['End Date'] = pd.to_datetime(messy_charging['Start Date'],infer_datetime_format=True)
 messy_charging['End Date']=pd.to_datetime(messy_charging['End Date'],format='%Y-%m-%d %H:%M:%S')
-
-
-### Timezones
-#from_zone = tx.gettx('UTC')
-#to_zone = tz.gettz('America/New_York')
 
 # index datetimes
 start_date = messy_charging['Start Date']
 start_date = pd.Index(start_date)
+
 # localize
 start_date = start_date.tz_localize(None)
 messy_charging['Start Date'] = start_date
-
-# convert based on TZ
-#messy_charging['Start Date'] = messy_charging['Start Time Zone'].apply(lambda x: messy_charging['Start Date'].tz_localize('utc') if 'UTC' 
-#              else messy_weather['Start Date'].tz_localize('utc'))
-
-#messy_charging['Start Date'] = messy_charging['Start Date'].tz_localize(None)
-
-#start_time = messy_charging['Start Date']
-#start_time_idx = pd.Index(start_time)
-
-#start_time_idx = start_time_idx.tz_localize('utc')
-#start_time_idx = start_time_idx.tz_convert(tz = 'America/New_York')
-#messy_charging['Start Date Index'] = start_time_idx
-
-
-#messy_charging['Start Date Adjusted'] = messy_charging['Start Time Zone'].apply(lambda x: messy_charging['Start Date Index'].astimezone(to_zone) if 'UTC' else messy_weather['Start Date Index'])
-#messy_charging['Start Date Adjusted'] = messy_charging['Start Time Zone'].apply(lambda x: messy_charging['Start Date'].tz_convert('America/New_York') if 'UTC' else messy_weather['Start Date'])
-
-#print("start time:", start_time.dtypes)
-#print("start time idx:", start_time_idx.dtypes)
-
 
 # rounding dates to the nearest hour
 messy_charging['Start Date Truncated'] = messy_charging['Start Date'].dt.round('60T')
@@ -157,7 +125,6 @@ messy_charging = messy_charging[messy_charging['energy'] > 0] # energy greater t
 # filter Ended By: Customer, Plug Out at Vehicle, or Plug Out at Station
 end_charging = ["Customer", "Plug Out at Vehicle", "Plug Out at Station"]
 messy_charging = messy_charging[messy_charging.Ended_By.isin(end_charging)]
-
 
 # create clean version
 charging = pd.DataFrame.copy(messy_charging)
@@ -219,35 +186,30 @@ data['avg_kw'] = avg_kw
 data = data.merge(driver_stats, on='User_ID')
 
 
-
 #### DCFC DATA ################################################################
 
 # filters
 data = data[data.Port_Type == 'DC Fast']
-#data = data[data.avg_kw < 40] # strange datapoint higher than 40 kW...
-#data = data[data.energy > 5]
+data = data[data.avg_kw < 30] # strange datapoint higher than 30 kW...
 data = data[data.Start_SOC.notnull()]
+data = data[data.charge_time > '00:05:00']
 
 print(data.shape)
-
 
 # change SOC to numbers
 soc_a = data['Start_SOC']
 soc_b = data['End_SOC']
 battery_series = data['battery_size']
 energy_series = data['energy']
-#plug_time = data['total_time']
-#charge_time = data['charge_time']
 
-
-
-#start_soc = series_to_list_of_percents(soc_a)
+# convert Start SOC to int
 start_soc = []
 for i in soc_a:
     num = i[:-1]
     num = int(num)
     start_soc.append(num)
 
+# convert End SOC to int
 end_soc = series_to_list_of_percents(soc_b)
 end_soc = []
 for i in soc_b:
@@ -255,10 +217,12 @@ for i in soc_b:
     num = int(num)
     end_soc.append(num)
 
+# battery and energy as lists
 battery = series_to_list_of_nums(battery_series)
 energy = series_to_list_of_nums(energy_series)  
 
 
+# fix End_SOC
 for i in range(len(start_soc)):
     if end_soc[i] < start_soc[i]:
         soc_e = energy[i]/battery[i]*100
@@ -274,10 +238,11 @@ change_soc = []
 for i in range(len(start_soc)):
     change_soc.append(end_soc[i] - start_soc[i])
 
+
+# append SOC variables
 data['Start_SOC'] = start_soc
 data['End_SOC'] = end_soc
 data['Change_SOC'] = change_soc
-
 
 
 #### Save Tidy Data ###########################################################
