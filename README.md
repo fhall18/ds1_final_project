@@ -9,7 +9,7 @@
 -analysis.py
 -data
 
-###clean_data.py
+### clean_data.py
 1. This file should be run first.
 2. This file takes in all data files, cleans them, and calculates necessary variables and equations for analysis.
  -btv_total_charging_sessions.csv
@@ -21,7 +21,7 @@
  -dcfc_tidy.csv
  -dcfc_ami_tidy.csv
  
-###analysis.py
+### analysis.py
 1. This file includes all calculations necessary for the EDA and analysis of our datasets. 
 2. Outputs:
  -summary statistics from dcfc tidy data file
@@ -38,7 +38,7 @@
  -Linear Regression on Effect of Temperature on Average Charging Rate
  -Effect of Temperature by Model Year (2013-2015, 2016-2019)
  
-###Data:
+### Data:
 1. btv_total_charging_sessions.csv
  -Features: Start Date
    Start Time Zone
