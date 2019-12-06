@@ -159,7 +159,7 @@ line = [ slope*xi + intercept for xi in kw]
 fig6 = plt.figure()
 plt.plot(kw,line,'r-',linewidth=5,label='linear regression')
 plt.scatter(kw,temp,c=ami['Year'], alpha = .7)
-plt.title('Charging Rate by Temperature', fontsize = 20)
+plt.title('AMI Maximum Demand by Temperature', fontsize = 20)
 plt.xlabel('Rate of Charge (kW)', fontsize=14)
 plt.ylabel('Temperature (F)', fontsize=16)
 plt.colorbar()
