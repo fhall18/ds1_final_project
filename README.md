@@ -7,7 +7,17 @@
 #### -README.md
 #### -clean_data.py
 #### -analysis.py
-#### -data
+#### -data (directory)
+#### -stats (directory)
+#### -minutes (directory)
+#### -ideas.pdf
+#### -FP-peer-evaluation-01_USERNAME.docx
+#### -FP-peer-evaluation-01_USERNAME.docx
+#### -FP-self-evaluation_USERNAME.docx
+#### -FP-team-process-evaluation_USERNAME.docx
+#### -reflection_UNCANNYHORSE.pdf
+#### -report_UNCANNYHORSE.PDF
+#### -slides_UNCANNYHORSE.pptx
 ##
 ### * clean_data.py
 #### 1. This file should be run first.
@@ -125,4 +135,25 @@
 ######   Max Lvl 2 Charge (kW)
 ######   Battery (kWh)
 ######   DC compatable
- 
+  ##
+### * stats
+#### Stats is a directory containing figures from our statistical analyses.
+  ##
+### * ideas.pdf
+#### File describing our research questions, possible statistical analyses, and datasets. 
+### * Minutes
+#### A directory that holds all of the documents that describe our various meetings.
+### * report_UNCANNYHORSE
+#### Our Technical report discussing our research processes. 
+### * Slides_UncannyHorse.pptx
+#### Our powerpoint to summarize and present our results from our project.
+### * Reflection_UncannyHorse.pdf
+#### Our group reflection our our group dynamics, gantt chart, and research processes. 
+### * FP-peer-evaluation-01_USERNAME.docx
+#### peer evaluation form 1
+### * FP-peer-evaluation-02_USERNAME.docx
+#### peer evaluation form 2
+### * FP-self-evaluation_USERNAME.docx
+#### self evaluation form
+### * FP-team-process-evaluation_USERNAME.docx
+#### team process evaluation form
